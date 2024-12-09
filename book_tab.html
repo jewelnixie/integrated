@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visita Pinas - Book Your Package</title>
+
+    <!-- script and style for reciepts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="book.css">
+</head>
+<body>
+    <!-- header -->
+    <div class="contact-image">
+        <img src="images/bookPic.png" class="img-fluid" alt="Responsive image">
+    </div>
+
+    <div class="container">
+        <form id="bookingForm" class="booking-form">
+            <!-- Personal Information -->
+            <section class="section">
+                <h2>Personal Information</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="middleName">Middle Name</label>
+                        <input type="text" id="middleName" name="middleName" placeholder="Enter middle name">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactNumber">Contact Number</label>
+                        <input type="tel" id="contactNumber" name="contactNumber" placeholder="09xxxxxxxxx" required>
+                    </div>
+                </div>
+            </section>
+            <br>
+            <!-- Travel Details -->
+            <section class="section">
+                <h2>Travel Details</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="packageType">Package Type</label>
+                        <select id="packageType" name="packageType" required>
+                            <option value="">Select your package</option>
+                            <option></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="arrivalDateTime">Arrival Date & Time</label>
+                        <div class="datetime">
+                            <input type="date" id="arrivalDate" name="arrivalDate" required>
+                            <input type="time" id="arrivalTime" name="arrivalTime" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="departureDate">Departure Date</label>
+                        <input type="date" id="departureDate" name="departureDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="departureTime">Departure Time</label>
+                        <input type="time" id="departureTime" name="departureTime" required>
+                    </div>
+                </div>
+            </section>
+            <br>
+            <!-- Travel Preferences -->
+            <section class="section">
+                <h2>Travel Preferences</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="classOfService">Class of Service</label>
+                        <select id="classOfService" name="classOfService" required>
+                            <option value="">Select Class of Service</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="accommodationType">Accommodation Type</label>
+                        <select id="accommodationType" name="accommodationType" required>
+                            <option value="">Select Accommodation</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="accessibilityNeeds">Accessibility Needs</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="accessibilityNeeds" value="yes" required> Yes (e.g., wheelchair assistance)</label>
+                            <label><input type="radio" name="accessibilityNeeds" value="no" required> No</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="petFriendly">Pet Friendly Accommodations</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="petFriendly" value="yes" required> Yes</label>
+                            <label><input type="radio" name="petFriendly" value="no" required> No</label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <br>
+
+            <!-- Number of Adults and Children -->
+            <section class="section">
+                <h2>Number of People</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="numAdults">Number of Adults</label>
+                        <div class="increment">
+                            <button type="button" id="decrementAdults">-</button>
+                            <input type="number" id="numAdults" name="numAdults" value="1" min="1" required>
+                            <button type="button" id="incrementAdults">+</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="numChildren">Number of Children</label>
+                        <div class="increment">
+                            <button type="button" id="decrementChildren">-</button>
+                            <input type="number" id="numChildren" name="numChildren" value="0" min="0" required>
+                            <button type="button" id="incrementChildren">+</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="form-group">
+                    <label for="modeofpayment">Mode of Payment</label>
+                    <select id="modeofpayment" name="modeofpayment" required>
+                        <option value="">Select Payment Method</option>
+                        <option value="visa">Visa Payment</option>
+                        <option value="gcash">Gcash</option>
+                        <option value="maya">Maya</option>
+                        <option value="paypal">Paypal</option>
+                    </select>
+                </div>
+            </section>
+            <br>
+            <!-- Special Request -->
+            <section class="section">
+                <h2>Special Request</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <textarea id="specialRequest" name="specialRequest" placeholder="Type your message here"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <button type="button" class="btn btn-primary" id="bookNowBtn">Book Now</button>
+        </form>
+    </div>
+
+    <!-- Popup Modal Receipt -->
+    <!-- <div class="modal fade" id="receiptModal" tabindex="-1" role="dialog" aria-labelledby="receiptModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="receiptModalLabel">Booking Receipt</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Name:</strong> <span id="receiptName"></span></p>
+                    <p><strong>Email:</strong> <span id="receiptEmail"></span></p>
+                    <p><strong>Package:</strong> <span id="receiptPackage"></span></p>
+                    <p><strong>Number of Adults:</strong> <span id="receiptAdults"></span></p>
+                    <p><strong>Number of Children:</strong> <span id="receiptChildren"></span></p>
+                    <p><strong>Total Amount:</strong> $<span id="receiptTotal"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- Popup Modal Receipt -->
+    <!-- Popup Modal Receipt -->
+    <div class="modal fade" id="receiptModal" tabindex="-1" aria-labelledby="receiptModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="receiptModalLabel">Booking Receipt</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <!-- Row: Logo on the left, Receipt Details on the right -->
+                        <div class="row align-items-center">
+                            <div class="col-md-4 text-center">
+                                <img src="visitaLogo.png" alt="Company Logo" class="img-fluid" style="max-height: 100px;">
+                                <p><strong>Visita Pinas Travel Agency</strong></p>
+                            </div>
+                            <div class="col-md-8">
+                                <h3 class="text-end style=" font-weight: bold;>Invoice</h3>
+                                <h5 class="text-end">Receipt #<span id="receiptNumber">12345</span></h5>
+                                <p class="text-end">Date: <span id="receiptDate">MM/DD/YYYY</span></p>
+                                <hr>
+                                <p><strong>Name:</strong> <span id="receiptName">John Doe</span></p>
+                                <p><strong>Email:</strong> <span id="receiptEmail">example@gmail.com</span></p>
+                                <p><strong>Contact Number: </strong> <span id="receiptContact"></span></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 style="font-weight: bold;">Travel Details</h4>
+                                <p><strong>Package:</strong> <span id="receiptPackage"></span></p>
+                                <p><strong>Departure Date & Time: </strong> <span id="receiptDeparture"></span></p>
+                                <p><strong>Arrival Date & Time: </strong> <span id="receiptArrival"></span></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 style="font-weight: bold;">Travel Preferences</h4>
+                                <p><strong>Class of Service:</strong> <span id="receiptClass"></span></p>
+                                <p><strong>Accomodation Type: </strong> <span id="receiptAccoma"></span></p>
+                                <p><strong>Accessibility Needs: </strong> <span id="receiptAccessibility"></span></p>
+                                <p><strong>Pet Friendly Accomodation: </strong> <span id="receiptPet"></span></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Special Request: </strong> <br> <span id="receiptRequest"></span></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Number of Adults:</strong> <span id="receiptAdults">2</span></p>
+                                <p><strong>Number of Children:</strong> <span id="receiptChildren">1</span></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <p style="font-size: 20px;"><strong>Total Amount:</strong> ₱<span id="receiptTotal">500</span></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="btnPrint" data-bs-dismiss="modal">Print Receipt</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+
+
+        // Destinations data (simulating database data)
+        const destinations = [
+            { id: 1, name: 'Boracay', price: 20000.00, duration: '3 days' },
+            { id: 2, name: 'Puerto Princesa', price: 10000.00, duration: '2 days' },
+            { id: 3, name: 'Coron', price: 15000.00, duration: '2 days' },
+            { id: 4, name: 'El Nido', price: 15000.00, duration: '3 days' },
+            { id: 5, name: 'Chocolate Hills', price: 7000.00, duration: '2 days' },
+            { id: 6, name: 'Baguio', price: 5000.00, duration: '4 days' },
+            { id: 7, name: 'Moalboal', price: 5000.00, duration: '2 days' },
+            { id: 8, name: 'Batanes', price: 7000.00, duration: '2 days' },
+            { id: 9, name: 'Palawan', price: 13000.00, duration: '3 days' }
+        ];
+
+        // Function to populate package dropdown
+        function populatePackages() {
+            const packageSelect = document.getElementById('packageType');
+            
+            // Clear existing options (except the first one)
+            while (packageSelect.options.length > 1) {
+                packageSelect.remove(1);
+            }
+
+            // Add destinations as options
+            destinations.forEach(dest => {
+                const option = new Option(
+                    `${dest.name} - ₱${dest.price} / ${dest.duration}`, 
+                    dest.id
+                );
+                packageSelect.add(option);
+            });
+        }
+
+        // Function to pre-select package if coming from destinations page
+        function preselectPackage() {
+            // Check if there's a package ID in the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const packageId = urlParams.get('packageId');
+
+            if (packageId) {
+                const packageSelect = document.getElementById('packageType');
+                packageSelect.value = packageId;
+            }
+        }
+
+
+
+        // Function to populate class service dropdown
+        const classService = [
+            { id: 1, name: 'Economy', price: 1500.00 },
+            { id: 2, name: 'Business', price: 2500.00 },
+            { id: 3, name: 'First Class', price: 3500.00 }
+        ];
+
+        function populateClassService() {
+            const classSelect = document.getElementById('classOfService');
+            
+            while (classSelect.options.length > 1) {
+                classSelect.remove(1);
+            }
+
+            classService.forEach(service => {
+                const option = new Option(
+                    `${service.name} - ₱${service.price.toFixed(2)}`,  
+                    service.id 
+                );
+                classSelect.add(option);
+            });
+        }
+
+        function preselectClassService() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const serviceId = urlParams.get('serviceId');
+
+            if (serviceId) {
+                const classSelect = document.getElementById('classOfService');
+                classSelect.value = serviceId;
+            }
+        }
+
+
+        // Type of Accomodation Data
+        const classAccomodation = [
+            { id: 1, name: 'Single', price: 3000.00 },
+            { id: 2, name: 'Double', price: 5500.00 },
+            { id: 3, name: 'Suite', price: 7500.00 }
+        ];
+
+        function populateAccomodation() {
+            const accomodationSelect = document.getElementById('accommodationType');
+            
+            while (accomodationSelect.options.length > 1) {
+                accomodationSelect.remove(1);
+            }
+
+            classAccomodation.forEach(accoma => {
+                const option = new Option(
+                    `${accoma.name} - ₱${accoma.price.toFixed(2)}`,  
+                    accoma.id  
+                );
+                accomodationSelect.add(option);
+            });
+        }
+
+        function preselectAccomodation() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const acommaId = urlParams.get('acommaId'); 
+
+            if (acommaId) {
+                const accomodationSelect = document.getElementById('accommodationType');
+                accomodationSelect.value = acommaId;
+            }
+        }
+
+
+
+        // Increment and Decrement functionality for number of adults
+        const incrementAdultsButton = document.getElementById('incrementAdults');
+        const decrementAdultsButton = document.getElementById('decrementAdults');
+        const numAdultsInput = document.getElementById('numAdults');
+
+        incrementAdultsButton.addEventListener('click', () => {
+            numAdultsInput.value = parseInt(numAdultsInput.value) + 1;
+        });
+
+        decrementAdultsButton.addEventListener('click', () => {
+            if (numAdultsInput.value > 1) {
+                numAdultsInput.value = parseInt(numAdultsInput.value) - 1;
+            }
+        });
+
+        // Increment and Decrement functionality for number of children
+        const incrementChildrenButton = document.getElementById('incrementChildren');
+        const decrementChildrenButton = document.getElementById('decrementChildren');
+        const numChildrenInput = document.getElementById('numChildren');
+
+        incrementChildrenButton.addEventListener('click', () => {
+            numChildrenInput.value = parseInt(numChildrenInput.value) + 1;
+        });
+
+        decrementChildrenButton.addEventListener('click', () => {
+            if (numChildrenInput.value > 0) {
+                numChildrenInput.value = parseInt(numChildrenInput.value) - 1;
+            }
+        });
+
+        // Populate packages when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            populatePackages();
+            preselectPackage();
+            populateClassService();
+            preselectClass();
+        });
+
+
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log("Page loaded, running functions...");
+            populateAccomodation();  // Populating the dropdown
+            preselectAccomodation(); // Preselect based on URL
+        });
+        
+
+
+        // Booking function triggered by clicking the "Book Now" button
+    document.getElementById('bookNowBtn').addEventListener('click', () => {
+        
+        // Customer Details
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+        const email = document.getElementById('email').value;
+        const contactNumber = document.getElementById('contactNumber').value;
+
+        // Travel Details
+        const packageType = document.getElementById('packageType').value;
+        const departureDate = document.getElementById('departureDate').value;
+        const departureTime = document.getElementById('departureTime').value;
+        const arrivalDate = document.getElementById('arrivalDate').value;
+        const arrivalTime = document.getElementById('arrivalTime').value;
+
+        // Travel Preferences
+        const classServiceId = document.getElementById('classOfService').value;
+        const accommodationId = document.getElementById('accommodationType').value;
+        const accessibilityNeeds = document.querySelector('input[name="accessibilityNeeds"]:checked')
+            ? document.querySelector('input[name="accessibilityNeeds"]:checked').value
+            : "Not specified";
+        const petFriendly = document.querySelector('input[name="petFriendly"]:checked')
+            ? document.querySelector('input[name="petFriendly"]:checked').value
+            : "Not specified";
+
+        // Find corresponding names and prices based on IDs
+        const selectedClassService = classService.find(service => service.id == classServiceId);
+        const selectedAccommodation = classAccomodation.find(accoma => accoma.id == accommodationId);
+
+        // Prepare output strings for class and accommodation
+        const classServiceOutput = selectedClassService 
+            ? `${selectedClassService.name} - ₱${selectedClassService.price.toFixed(2)}`
+            : "Not specified";
+
+        const accommodationOutput = selectedAccommodation 
+            ? `${selectedAccommodation.name} - ₱${selectedAccommodation.price.toFixed(2)}`
+            : "Not specified";
+
+        // Number of People
+        const numAdults = parseInt(document.getElementById('numAdults').value);
+        const numChildren = parseInt(document.getElementById('numChildren').value);
+
+        const request = document.getElementById('specialRequest').value;
+
+        // Get the selected package based on the package ID
+        const selectedPackage = destinations.find(dest => dest.id === parseInt(packageType));
+        const packagePrice = selectedPackage ? selectedPackage.price : 0;
+
+        // Calculate the total amount including package, class of service, and accommodation prices
+        const classServicePrice = selectedClassService ? selectedClassService.price : 0;
+        const accommodationPrice = selectedAccommodation ? selectedAccommodation.price : 0;
+
+        // Calculate total cost for adults and children
+        const totalAmount = ((numAdults + numChildren) * packagePrice) + (numAdults * classServicePrice) + (numAdults * accommodationPrice);
+
+        // Update the modal with the values 
+
+        // Customer
+        document.getElementById('receiptName').innerText = `${firstName} ${lastName}`;
+        document.getElementById('receiptEmail').innerText = email;
+        document.getElementById('receiptContact').innerText = contactNumber;
+
+        // Travel
+        document.getElementById('receiptPackage').innerText = selectedPackage ? selectedPackage.name : 'N/A';
+        document.getElementById('receiptDeparture').innerText = `${departureDate} ${departureTime}`;
+        document.getElementById('receiptArrival').innerText = `${arrivalDate} ${arrivalTime}`;
+
+        // Preferences
+        document.getElementById('receiptClass').innerText = classServiceOutput;
+        document.getElementById('receiptAccoma').innerText = accommodationOutput;
+        document.getElementById('receiptAccessibility').innerText = accessibilityNeeds;
+        document.getElementById('receiptPet').innerText = petFriendly;
+
+        // Number of People
+        document.getElementById('receiptAdults').innerText = numAdults;
+        document.getElementById('receiptChildren').innerText = numChildren;
+        document.getElementById('receiptRequest').innerText = request;
+
+        // Total amount
+        document.getElementById('receiptTotal').innerText = totalAmount.toFixed(2);
+
+        // Open the modal (using Bootstrap's modal method)
+        const myModal = new bootstrap.Modal(document.getElementById('receiptModal'));
+        myModal.show();
+    });
+                
+    </script>
+
+    <script>
+        const today = new Date();
+
+        const formattedDate = (today.getMonth() + 1).toString().padStart(2, '0') + '/' + 
+                      today.getDate().toString().padStart(2, '0') + '/' + 
+                      today.getFullYear();
+
+        document.getElementById('receiptDate').innerText = formattedDate;
+
+
+        function generateReceiptNumber() {
+            return Math.floor(10000 + Math.random() * 90000); // Generates a number between 10000 and 99999
+        }
+
+        // Display the generated receipt number
+        document.getElementById('receiptNumber').innerText = generateReceiptNumber();
+
+        const $btnPrint = document.querySelector("#btnPrint");
+            $btnPrint.addEventListener("click", () => {
+                const printContent = document.getElementById('receiptModal'); // Get the modal content
+                const printWindow = window.open('', '', 'height=600,width=800'); // Open a new window for printing
+                printWindow.document.write('<html><head><title>Print Receipt</title></head><body>');
+                printWindow.document.write(printContent.innerHTML); // Write the content of the modal to the print window
+                printWindow.document.write('</body></html>');
+                printWindow.document.close(); // Close the document for printing
+                printWindow.print(); // Trigger the print dialog
+            });
+    </script>
+
+</body>
+</html>
